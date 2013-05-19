@@ -14,17 +14,16 @@ Canterbury 4th year Mechatronics project.
 # Usage
 
 - Connect to the mentor
-	
-	connectMentor
+
+        connectMentor
 
 - Query the mentor
-	
-	pos = getAxisPosition(s,1);
-		
-- Close the connection
-	
-	cleanupMentor
-	
 
+        pos = getAxisPosition(s,1);
+
+- Close the connection
+
+        cleanupMentor
+		
 # Author
 Jared Lewis: jared@jared.kiwi.nz
