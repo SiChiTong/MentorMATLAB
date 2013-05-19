@@ -1,5 +1,5 @@
 # MentorMATLAB
-============
+
 A MATLAB interface to communicate with a Mentor Arm.
 
 # Description
@@ -14,12 +14,15 @@ Canterbury 4th year Mechatronics project.
 # Usage
 
 - Connect to the mentor
+
 	connectMentor
 
 - Query the mentor
+
 	pos = getAxisPosition(s,1);
 		
 - Close the connection
+
 	cleanupMentor
 
 
