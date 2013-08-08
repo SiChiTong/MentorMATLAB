@@ -4,6 +4,7 @@ function [ value ] = getAxisPos(s, axis, val)
 %   interperts the mentors response. This function assumes that the mentor
 %   serial port is open and ready for communication
 
+val = val + 10000;
 packet = EncMentorCommand(MentorCMD.SET_DUTY, axis, val);
 fwrite(s, packet);
 res = fread(s,4);
