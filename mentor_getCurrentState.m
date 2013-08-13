@@ -5,7 +5,7 @@ function [ state ] = mentor_getCurrentState(s)
 state = zeros(6,1);
 
 for i = 1:6
-    packet = EncMentorCommand(MentorCMD.READ_POS, axis,3000);
+    packet = EncMentorCommand(MentorCMD.READ_POS, i-1,3000);
     fwrite(s, packet);
     res = fread(s,4);
 

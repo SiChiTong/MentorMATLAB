@@ -8,7 +8,7 @@ function [ ] = mentor_setState( mentor, state, enable )
 state = state .* enable;
 
 for i=1:6
-    mentor_setDutyCycle(mentor,i,state(i));
+    mentor_setDutyCycle(mentor,i-1,state(i));
 
 end
 
