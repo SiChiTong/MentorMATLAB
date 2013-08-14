@@ -14,5 +14,6 @@ for i = 1:6
     state(i) = str2double(line);
 end
 
+
 end
 

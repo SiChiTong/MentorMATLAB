@@ -1,4 +1,4 @@
-function [disp ] = setPos( s, axis, target, Kp, Kd )
+function [disp ] = setPos( s, axis, target, Kp, Ki, Kd)
 %SETPOS Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -7,6 +7,7 @@ tic;
 
 fs = stoploop('Halt');
 disp = [];
+sum = 0;
 
 while ~fs.Stop() && abs(error) > 10
     prevError = error;
@@ -16,14 +17,24 @@ while ~fs.Stop() && abs(error) > 10
     error = pos - target
     
     if (pos < 300) || (pos > 2400)
-        haltMentor(s);
+        mentor_halt(s);
         break;
     end
     
     dt = toc;
     dErr = (error-prevError)/dt;
+    sum = sum + dt*error;
     
-    a = Kp*error + dErr*Kd;
+    %Clip Sum
+    if (sum > 10000)
+        sum = 10000;
+    end
+    
+    if (sum < -10000)
+        sum = -10000;
+    end
+    
+    a = Kp*error + dErr*Kd + sum*Ki;
     
     %clip result
     if a > 10000
@@ -34,11 +45,11 @@ while ~fs.Stop() && abs(error) > 10
     end
    
     %Set Duty Cycl
-    setDutyCycle(s,axis,a);
+    mentor_setDutyCycle(s,axis,a);
     %startTimer
     tic;
 end
 
 fs.Clear();
-setDutyCycle(s,axis,0);
+mentor_setDutyCycle(s,axis,0);
 
